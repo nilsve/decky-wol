@@ -1,4 +1,5 @@
 import {Device, Setting} from "../models";
+import {fetchNoCors} from "@decky/api";
 
 const PORT = 21195;
 
@@ -9,13 +10,13 @@ const DISCOVERY_PATH = `${BASE_API_PATH}/discovery`;
 const WOL_PATH = `${BASE_API_PATH}/wol`;
 
 export const getSetting = async (setting: string): Promise<Setting> => {
-    const response = await fetch(`${SETTINGS_PATH}/${setting}`);
+    const response = await fetchNoCors(`${SETTINGS_PATH}/${setting}`);
 
     return response.json();
 }
 
 export const saveSetting = async (setting: Setting): Promise<Setting> => {
-    const response = await fetch(SETTINGS_PATH, {
+    const response = await fetchNoCors(SETTINGS_PATH, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -27,19 +28,19 @@ export const saveSetting = async (setting: Setting): Promise<Setting> => {
 }
 
 export const getDiscoveredDevices = async (): Promise<Device[]> => {
-    const response = await fetch(`${DISCOVERY_PATH}/devices`);
+    const response = await fetchNoCors(`${DISCOVERY_PATH}/devices`);
 
     return response.json();
 }
 
 export const runDeviceDiscovery = async (): Promise<void> => {
-    await fetch(`${DISCOVERY_PATH}/run-discovery`, {
+    await fetchNoCors(`${DISCOVERY_PATH}/run-discovery`, {
         method: "POST",
     });
 }
 
 export const wakeDevice = async (device: string): Promise<number> => {
-    const response = await fetch(`${WOL_PATH}/${device}`, {
+    const response = await fetchNoCors(`${WOL_PATH}/${device}`, {
         method: "POST",
     });
 

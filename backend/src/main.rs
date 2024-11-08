@@ -4,7 +4,6 @@ mod wol;
 
 use std::error::Error;
 use std::sync::RwLock;
-use actix_cors::Cors;
 use actix_web::middleware::Logger;
 use actix_web::web::scope;
 use env_logger::Env;
@@ -31,7 +30,6 @@ async fn main() -> Result<(), ()> {
             .app_data(actix_web::web::Data::new(RwLock::new(discovery_service.clone())))
             .app_data(actix_web::web::Data::new(wol_service.clone()))
             .wrap(Logger::default())
-            .wrap(Cors::permissive()) // TODO: This is insecure!
             .service(scope("/api")
                 .service(settings::routes::get_routes())
                 .service(discovery::routes::get_routes())
@@ -40,7 +38,7 @@ async fn main() -> Result<(), ()> {
 
         app
     })
-        .bind(("0.0.0.0", 21195))
+        .bind(("127.0.0.1", 21195))
         .unwrap()
         .run()
         .await

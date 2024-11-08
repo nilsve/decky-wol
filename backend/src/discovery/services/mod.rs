@@ -1,15 +1,12 @@
 use std::collections::HashMap;
 use std::net::{IpAddr, Ipv4Addr};
 use std::process::Command;
-use std::rc::Rc;
 use std::str::FromStr;
 use std::sync::Arc;
 use std::sync::atomic::AtomicBool;
 use std::time::Duration;
 use ping::ping;
 use thiserror::Error;
-use tokio::sync::RwLock;
-use tokio::task::JoinHandle;
 use crate::discovery::models::Device;
 use crate::discovery::services::DiscoveryError::RunCommandError;
 
