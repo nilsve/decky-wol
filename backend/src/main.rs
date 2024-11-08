@@ -2,7 +2,6 @@ mod settings;
 mod discovery;
 mod wol;
 
-use std::error::Error;
 use std::sync::RwLock;
 use actix_web::middleware::Logger;
 use actix_web::web::scope;
@@ -25,7 +24,7 @@ async fn main() -> Result<(), ()> {
 
     // Start actix server
     actix_web::HttpServer::new(move || {
-        let mut app = actix_web::App::new()
+        actix_web::App::new()
             .app_data(actix_web::web::Data::new(settings_service.clone()))
             .app_data(actix_web::web::Data::new(RwLock::new(discovery_service.clone())))
             .app_data(actix_web::web::Data::new(wol_service.clone()))
@@ -34,9 +33,7 @@ async fn main() -> Result<(), ()> {
                 .service(settings::routes::get_routes())
                 .service(discovery::routes::get_routes())
                 .service(wol::routes::get_routes())
-            );
-
-        app
+            )
     })
         .bind(("127.0.0.1", 21195))
         .unwrap()

@@ -1,7 +1,6 @@
 use std::sync::RwLock;
 use actix_web::{get, post};
-use actix_web::web::{Data, Json, Path};
-use tokio::sync::Mutex;
+use actix_web::web::{Data, Json};
 use crate::discovery::models::Device;
 use crate::discovery::services::DiscoveryService;
 
@@ -22,7 +21,7 @@ async fn get_discovered_devices(
 
 #[post("/run-discovery")]
 async fn run_discovery(
-    mut discovery_service: Data<RwLock<DiscoveryService>>,
+    discovery_service: Data<RwLock<DiscoveryService>>,
 ) -> Json<()> {
     discovery_service.write().unwrap().start_discovery().await.unwrap();
 

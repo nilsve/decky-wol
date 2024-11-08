@@ -1,4 +1,4 @@
-use actix_web::{get, post};
+use actix_web::post;
 use actix_web::web::{Data, Json, Path};
 use crate::wol::services::WolService;
 

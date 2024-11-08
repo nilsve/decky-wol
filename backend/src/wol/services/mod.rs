@@ -1,4 +1,3 @@
-use std::net::UdpSocket;
 
 #[derive(Clone)]
 pub struct WolService {

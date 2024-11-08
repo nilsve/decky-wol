@@ -38,7 +38,7 @@ impl DiscoveryService {
         let output = Command::new("ip")
             .arg("route")
             .output()
-            .map_err(|e| RunCommandError(e))?;
+            .map_err(RunCommandError)?;
 
         let output_str = String::from_utf8_lossy(&output.stdout);
         for line in output_str.lines() {
@@ -100,7 +100,7 @@ impl DiscoveryService {
         let output = Command::new("ip")
             .arg("neigh")
             .output()
-            .map_err(|e| RunCommandError(e))?;
+            .map_err(RunCommandError)?;
 
         let output_str = String::from_utf8_lossy(&output.stdout);
         let mut arp_table = HashMap::new();

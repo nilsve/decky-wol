@@ -11,8 +11,8 @@ pub struct SettingsFile {
     pub settings: HashMap<String, String>,
 }
 
-const SETTINGS_FOLDER: &'static str = ".config/decky-wol";
-const SETTINGS_FILE_NAME: &'static str = "settings.json";
+const SETTINGS_FOLDER: &str = ".config/decky-wol";
+const SETTINGS_FILE_NAME: &str = "settings.json";
 
 #[derive(Debug, Error)]
 pub enum SettingError {
