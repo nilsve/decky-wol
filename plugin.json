@@ -1,11 +1,11 @@
 {
-  "name": "Example Plugin",
+  "name": "Decky WOL",
   "author": "John Doe",
-  "flags": ["debug", "_root"],
+  "flags": ["debug", "root"],
   "api_version": 1,
   "publish": {
     "tags": ["template", "root"],
-    "description": "Decky example plugin.",
+    "description": "Decky Wake On Lan plugin.",
     "image": "https://opengraph.githubassets.com/1/SteamDeckHomebrew/PluginLoader"
   }
 }
